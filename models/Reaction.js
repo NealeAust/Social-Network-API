@@ -21,15 +21,11 @@ default: Date.now,
 get: createdAtVal => moment(createdAtVal).format("DD MMM YYYY hh:mm:ss")
 },
 
-toJSON: {
-getters: true
-},
-id: false
+// toJSON: {
+// getters: true
+// },
+// id: false
 });
 
 
 module.exports = reactionSchema;
- 
-
-
-

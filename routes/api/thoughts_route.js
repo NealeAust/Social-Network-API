@@ -8,7 +8,7 @@ const {
     deleteThought,
     addReaction,
     deleteReaction
-} = require('../../controllers/thought_controller)')
+} = require('../../controllers/thought_controller')
 
 router
     .route('/')
