@@ -4,7 +4,7 @@ const userController = {
 
     // Get all users
     getAllUsers(req, res) {
-        Userfind({})
+        User.find({})
             .populate({
                 path: 'thoughts',
                 select: '-__v'
@@ -40,7 +40,11 @@ const userController = {
     createUser({ body }, res) {
         User.create(body)
             .then(dbUserData => res.json(dbUserData))
-            .catch(err => res.status(400).json(err));
+            .catch(err => {
+                console.log(err)
+                res.status(500).json(err)
+            
+            });
     },
 
     // Update a User
@@ -53,7 +57,10 @@ const userController = {
                 }
                 res.json(dbUserData);
             })
-            .catch(err => res.status(400).json(err))
+            .catch(err => {
+                console.log(err)
+                res.status(400).json(err)
+            })
     },
 
     // Delete a user by _id
@@ -96,7 +103,9 @@ const userController = {
             { new: true }
         )
             .then(dbUserData => res.json(dbUserData))
-            .catch(err => res.json(err));
+            .catch(err => 
+                
+                res.json(err));
     }
 };
 
