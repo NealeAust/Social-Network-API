@@ -1,5 +1,6 @@
 const { Thought, User } = require('../models');
 
+
 const thoughtController = {
 
     // Get all thoughts & sort in descending order
