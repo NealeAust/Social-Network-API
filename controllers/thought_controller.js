@@ -1,11 +1,9 @@
 const { Thought, User } = require('../models');
 
-
 const thoughtController = {
 
-    // Get all thoughts & sort in descending order
+    // Get all thoughts 
     getAllThoughts(req, res) {
-        console.log("hello")
         Thought.find({})
             .then(dbThoughtData => {
                 console.log(dbThoughtData)
@@ -16,10 +14,9 @@ const thoughtController = {
                 res.status(500).json(err)
             });
 
-
     },
-    // Get a single thought by _id
 
+    // Get a single thought by _id
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
             .then(dbThoughtData => res.json(dbThoughtData))
@@ -47,7 +44,7 @@ const thoughtController = {
                 }
                 res.json(dbUserData);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.status(500).json(err));
     },
 
     // Update a thought 
@@ -63,7 +60,7 @@ const thoughtController = {
                 }
                 res.json(updatedThought);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.status(500).json(err));
     },
 
     // Delete a thought
@@ -75,7 +72,7 @@ const thoughtController = {
                 }
                 res.json(deletedThought);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.status(500).json(err));
     },
 
     // ***** Reactions *****
@@ -93,20 +90,20 @@ const thoughtController = {
                 }
                 res.json(dbThoughtData)
             })
-            .catch(err => res.json(err));
+            .catch(err => res.status(500).json(err));
     },
 
     // Delete a reaction
     deleteReaction({ params }, res) {
         Thought.findOneAndUpdate(
             { _id: params.thoughtId },
-            { $pull: { reactions: { reactionId: params.reactionId } } },
+            { $pull: { reactions: { reactionId: params.reactionsId } } },
             { new: true }
         )
-            .then(dbThoughtData => res.json(dbThoughtData))
-            .catch(err => res.json(err));
+            .then(dbThoughtData => res.status.json(dbThoughtData))
+            .catch(err => res.status(500).json(err));
     }
-    
+
 };
 
 module.exports = thoughtController

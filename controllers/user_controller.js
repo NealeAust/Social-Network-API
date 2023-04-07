@@ -13,7 +13,7 @@ const userController = {
             .then(dbUserData => res.json(dbUserData))
             .catch(err => {
                 console.log(err)
-                res.status(500);
+                res.status(400);
             });
     },
 
@@ -43,7 +43,7 @@ const userController = {
             .catch(err => {
                 console.log(err)
                 res.status(500).json(err)
-            
+
             });
     },
 
@@ -59,7 +59,7 @@ const userController = {
             })
             .catch(err => {
                 console.log(err)
-                res.status(400).json(err)
+                res.status(500).json(err)
             })
     },
 
@@ -74,7 +74,7 @@ const userController = {
                 Thought.deleteMany({ _id: { $in: User.thoughts } })
                 res.json(dbUserData);
             })
-            .catch(err => res.status(400).json(err))
+            .catch(err => res.status(500).json(err))
     },
 
     // Add user to a user's friend list
@@ -88,11 +88,11 @@ const userController = {
                 if (!dbUserData) {
                     res.status(404).json({ message: 'This id does not exist' })
                     return;
-
                 }
+                Thought.deleteMany({ _id: { $in: User.thoughts } })
                 res.json(dbUserData);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.status(500).json(err));
     },
 
     //  Delete a friend from a user's friend list 
@@ -103,9 +103,7 @@ const userController = {
             { new: true }
         )
             .then(dbUserData => res.json(dbUserData))
-            .catch(err => 
-                
-                res.json(err));
+            .catch(err => res.status(500).json(err));
     }
 };
 
