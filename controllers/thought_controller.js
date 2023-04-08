@@ -103,7 +103,6 @@ const thoughtController = {
             .then(dbThoughtData => res.status.json(dbThoughtData))
             .catch(err => res.status(500).json(err));
     }
-
 };
 
 module.exports = thoughtController
